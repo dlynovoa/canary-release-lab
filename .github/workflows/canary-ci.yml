@@ -32,8 +32,10 @@ jobs:
       - name: Promote and rollback
         run: |
           ./scripts/promote.sh green
+          sleep 2
           curl -fsS http://127.0.0.1:8080/api/info | grep -q '"version":"v2"'
           ./scripts/promote.sh blue
+          sleep 2
           curl -fsS http://127.0.0.1:8080/api/info | grep -q '"version":"v1"'
       - name: Logs on failure
         if: failure()
